@@ -60,7 +60,7 @@ class Block:
         # BIP91 is signalled if the 5th bit from the right is 1
         # shift 4 bits to the right and see if the last bit is 1
         raise NotImplementedError
-    
+
     def bip141(self):
         '''Returns whether this block is signaling readiness for BIP141'''
         # BIP91 is signalled if the 2nd bit from the right is 1

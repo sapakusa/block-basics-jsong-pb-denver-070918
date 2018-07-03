@@ -1,5 +1,5 @@
 
-# Block Basics [not working]
+# Block Basics
 
 ## Blocks
 
@@ -46,6 +46,12 @@ This is the metadata for every block. The nice thing is that each field is fixed
 
 
 ```python
+from io import BytesIO
+from helper import (
+    double_sha256,
+    int_to_little_endian,
+    little_endian_to_int,
+)
 from block import Block
 
 class Block(Block):
@@ -79,28 +85,4 @@ class Block(Block):
         # double-sha256
         # reverse
         pass
-```
-
-### Version
-
-Version in normal software refers to a particular state. That is, a particular version reflects a particular set of features. For a block, this is similar, in the sense that the version field reflects what capabilities the software that produced the block is ready for. In the past this was used as a way to indicate a single feature that was ready. Version 2 meant that the software was ready for BIP0016, or pay-to-script-hash as described previously.
-
-Unfortunately, this means that only one feature may be signaled on the network at a time. To alleviate this, the developers came up with BIP9, which allows up to 29 different features to be signaled at the same time. The way this works is discussed later.
-
-
-```python
-# Version Signaling Example
-
-from io import BytesIO
-from block import Block
-
-hex_block = '020000208ec39428b17323fa0ddec8e887b4a7c53b8c0a0a220cfd0000000000000000005b0750fce0a889502d40508d39576821155e9c9e3f5c3157f961db38fd8b25be1e77a759e93c0118a4ffd71d'
-
-# bytes.fromhex to get the binary block
-# create a stream using BytesIO
-# parse the block
-# get the version
-# rightshift 29 (version >> 29) and see if it's equal to 0b001 for BIP9
-# see if bit 4 (version >> 4) from the right is set ( & 1) for BIP91
-# see if bit 1 (version >> 1) from the right is set ( & 1) for BIP141
 ```
